@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://3xkvquq4jud"]
+
+[ext_resource type="PackedScene" uid="uid://ducxu50cc17pu" path="res://default.tscn" id="1_m0q3j"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0vcn1"]
+size = Vector3(2, 2, 2)
+
+[node name="collision" type="Node3D" unique_id=501014452]
+
+[node name="static" type="StaticBody3D" parent="." unique_id=650965203]
+
+[node name="collision" type="CollisionShape3D" parent="static" unique_id=726201419]
+shape = SubResource("BoxShape3D_0vcn1")
+
+[node name="cube" parent="." unique_id=393932633 instance=ExtResource("1_m0q3j")]
+color = Color(0.973535, 0.9735351, 0.973535, 1)
