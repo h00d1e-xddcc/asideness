@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="asideness"
-run/main_scene="uid://dxhjjx4ifvwqo"
+run/main_scene="uid://c7wjlqf4cn6il"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="uid://csg8ta1k0ieyj"
 
