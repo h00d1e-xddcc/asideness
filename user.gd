@@ -104,6 +104,7 @@ func set_up() :
 	await get_tree().create_timer(.3).timeout
 	pty.write("cd ~/Desktop/asideness")
 	push_note()
+	#create_file(path + "/cfg-reload.sh", )
 
 func push_note() :
 	var file = FileAccess.open(path + "/note.md", FileAccess.WRITE)
