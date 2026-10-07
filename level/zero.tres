@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="asideness_level" format=3 uid="uid://diq5t6dw0oojt"]
+
+[ext_resource type="Script" uid="uid://bp6emab4iu6eq" path="res://level.gd" id="1_vq25l"]
+
+[resource]
+script = ExtResource("1_vq25l")
+note = "here too dark, add some bright "
+metadata/_custom_type_script = "uid://bp6emab4iu6eq"

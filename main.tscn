@@ -1,7 +1,14 @@
 [gd_scene format=3 uid="uid://c7wjlqf4cn6il"]
 
+[ext_resource type="FontFile" uid="uid://dc3isxur0qfch" path="res://SpaceMono-Regular.ttf" id="1_h2yge"]
 [ext_resource type="Texture2D" uid="uid://ch8id1l84i8t" path="res://textures/Prototype_Grid_Gray_05-256x256.png" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://beynx8omh45nc" path="res://user.tscn" id="2_0xm2m"]
+[ext_resource type="Resource" uid="uid://diq5t6dw0oojt" path="res://level/zero.tres" id="4_1bvp3"]
+
+[sub_resource type="Theme" id="Theme_h2yge"]
+default_base_scale = 1.0
+default_font = ExtResource("1_h2yge")
+default_font_size = 16
 
 [sub_resource type="Environment" id="Environment_0vcn1"]
 background_energy_multiplier = 2.5
@@ -19,7 +26,31 @@ albedo_texture = ExtResource("1_ig7tw")
 uv1_triplanar = true
 uv1_world_triplanar = true
 
-[node name="Main" type="Node3D" unique_id=2077997563]
+[node name="main" type="Node3D" unique_id=2077997563]
+
+[node name="dark" type="ColorRect" parent="." unique_id=1089756696]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Terminal" type="Terminal" parent="." unique_id=1427198143]
+visible = false
+texture_filter = 1
+texture_repeat = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_h2yge")
+
+[node name="PTY" type="PTY" parent="Terminal" unique_id=1907019942]
+cols = 114
+rows = 26
+terminal_path = NodePath("..")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1711576086]
 environment = SubResource("Environment_0vcn1")
@@ -71,5 +102,11 @@ transform = Transform3D(-13.636743, -1.2111863e-14, 5.9608095e-07, 5.9608095e-07
 material_override = SubResource("StandardMaterial3D_0xm2m")
 texture = ExtResource("1_ig7tw")
 
-[node name="asideness_user" parent="." unique_id=2138818970 instance=ExtResource("2_0xm2m")]
+[node name="asideness_user" parent="." unique_id=2138818970 node_paths=PackedStringArray("console") instance=ExtResource("2_0xm2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+console = NodePath("../Terminal")
+lvl = ExtResource("4_1bvp3")
+
+[connection signal="data_sent" from="Terminal" to="Terminal/PTY" method="write"]
+[connection signal="size_changed" from="Terminal" to="Terminal/PTY" method="resizev"]
+[connection signal="data_received" from="Terminal/PTY" to="Terminal" method="write"]
