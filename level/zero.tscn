@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://p7pn20lo7vry"]
+
+[ext_resource type="Texture2D" uid="uid://ch8id1l84i8t" path="res://textures/Prototype_Grid_Gray_05-256x256.png" id="1_u80tr"]
+[ext_resource type="PackedScene" uid="uid://b8r5g5hahs7q6" path="res://collision.tscn" id="2_oh3wl"]
+[ext_resource type="PackedScene" uid="uid://dsq7wo0qe3mpp" path="res://door.tscn" id="3_jcjxg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0vcn1"]
+size = Vector3(15, 0.1, 15)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xm2m"]
+albedo_texture = ExtResource("1_u80tr")
+uv1_triplanar = true
+uv1_world_triplanar = true
+uv2_world_triplanar = true
+
+[node name="StaticBody3D" type="StaticBody3D" unique_id=1601148155]
+
+[node name="floor" type="CollisionShape3D" parent="." unique_id=1442526679]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.049999997, 0)
+visible = false
+shape = SubResource("BoxShape3D_0vcn1")
+
+[node name="Sprite3D2" type="Sprite3D" parent="floor" unique_id=1372639620]
+transform = Transform3D(13.6367445, 0, 0, 0, -5.9608107e-07, 13.6367445, 0, -13.6367445, -5.9608107e-07, 0, 0.049999997, 0)
+material_override = SubResource("StandardMaterial3D_0xm2m")
+texture = ExtResource("1_u80tr")
+
+[node name="for" type="CollisionShape3D" parent="." unique_id=570488205]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 5, -5)
+shape = SubResource("BoxShape3D_0vcn1")
+
+[node name="floor" type="Sprite3D" parent="for" unique_id=1896601703]
+transform = Transform3D(13.6367445, 0, 0, 0, -5.9608095e-07, -13.6367445, 0, 13.6367445, -5.9608095e-07, 0, 0, -5)
+material_override = SubResource("StandardMaterial3D_0xm2m")
+texture = ExtResource("1_u80tr")
+
+[node name="back" type="CollisionShape3D" parent="." unique_id=1073509337]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 5, 5)
+shape = SubResource("BoxShape3D_0vcn1")
+
+[node name="floor2" type="Sprite3D" parent="back" unique_id=730936915]
+transform = Transform3D(-13.6367445, 0, 1.192162e-06, 1.192162e-06, -5.9608107e-07, 13.6367445, 5.2111056e-14, 13.6367445, 5.9608107e-07, 0, 0, -5)
+material_override = SubResource("StandardMaterial3D_0xm2m")
+texture = ExtResource("1_u80tr")
+
+[node name="left" type="CollisionShape3D" parent="." unique_id=1664352473]
+transform = Transform3D(0, -1.0000001, -4.371139e-08, 0, -4.371139e-08, 1, -1.0000001, 0, -8.881784e-16, -5, 5, 0)
+shape = SubResource("BoxShape3D_0vcn1")
+
+[node name="floor4" type="Sprite3D" parent="left" unique_id=158598354]
+transform = Transform3D(13.636743, -1.2111853e-14, -1.7882428e-06, -1.7882428e-06, -5.960809e-07, -13.636743, -7.816657e-14, 13.6367445, -5.960809e-07, 4.4408917e-15, 0, -5)
+material_override = SubResource("StandardMaterial3D_0xm2m")
+texture = ExtResource("1_u80tr")
+
+[node name="right" type="CollisionShape3D" parent="." unique_id=506283636]
+transform = Transform3D(0, -1.0000001, -4.371139e-08, 0, -4.371139e-08, 1, -1.0000001, 0, -8.881784e-16, 4, 5, 0.15999937)
+shape = SubResource("BoxShape3D_0vcn1")
+
+[node name="floor3" type="Sprite3D" parent="right" unique_id=1779004794]
+transform = Transform3D(-13.636743, -1.2111863e-14, 5.9608095e-07, 5.9608095e-07, -5.96081e-07, 13.636743, 2.6055516e-14, 13.6367445, 5.96081e-07, 3.9999986, -0.99999976, -5)
+material_override = SubResource("StandardMaterial3D_0xm2m")
+texture = ExtResource("1_u80tr")
+
+[node name="Default" parent="." unique_id=1717761093 instance=ExtResource("2_oh3wl")]
+transform = Transform3D(5, 0, 0, 0, -2.1855695e-07, 5, 0, -5, -2.1855695e-07, 0, 0, 0)
+
+[node name="Door" parent="." unique_id=1771202539 instance=ExtResource("3_jcjxg")]
+transform = Transform3D(0.99977314, -0.01049157, 0.018537505, 0.010271374, 0.999876, 0.011934396, -0.018660415, -0.01174129, 0.99975705, -4.4, 0, 3.6)

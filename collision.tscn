@@ -1,5 +1,21 @@
 [gd_scene format=3 uid="uid://b8r5g5hahs7q6"]
 
+[ext_resource type="Texture2D" uid="uid://ch8id1l84i8t" path="res://textures/Prototype_Grid_Gray_05-256x256.png" id="1_m0q3j"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m0q3j"]
+albedo_texture = ExtResource("1_m0q3j")
+uv1_triplanar = true
+uv1_world_triplanar = true
+uv2_world_triplanar = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u80tr"]
+size = Vector3(2, 2, 0.1)
+
 [node name="Default" type="Sprite3D" unique_id=1717761093]
+material_override = SubResource("StandardMaterial3D_m0q3j")
+pixel_size = 0.008
+texture_filter = 1
+texture = ExtResource("1_m0q3j")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1289010972]
+shape = SubResource("BoxShape3D_u80tr")

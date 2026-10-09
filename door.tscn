@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://dsq7wo0qe3mpp"]
+
+[ext_resource type="PackedScene" uid="uid://b8r5g5hahs7q6" path="res://collision.tscn" id="1_ba8gm"]
+[ext_resource type="Texture2D" uid="uid://dtj36sgdwjmdq" path="res://textures/exit_sign01.png" id="2_v6xrn"]
+
+[sub_resource type="Gradient" id="Gradient_v6xrn"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_378qc"]
+gradient = SubResource("Gradient_v6xrn")
+width = 100
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_378qc"]
+size = Vector3(0.5, 2.4, 1)
+
+[node name="Door" type="Node3D" unique_id=1771202539]
+
+[node name="Default" parent="." unique_id=1717761093 instance=ExtResource("1_ba8gm")]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+
+[node name="Default2" parent="." unique_id=611233012 instance=ExtResource("1_ba8gm")]
+transform = Transform3D(-0.5, 0, -8.742278e-08, 0, 1, 0, 4.371139e-08, 0, -1, 0, 1, 0)
+
+[node name="Default4" parent="." unique_id=1806643133 instance=ExtResource("1_ba8gm")]
+transform = Transform3D(6.556708e-08, 0, 1, 0, 1, 0, -0.5, 0, 1.3113416e-07, 0.5, 1, 0.5)
+
+[node name="Default5" parent="." unique_id=708577057 instance=ExtResource("1_ba8gm")]
+transform = Transform3D(6.556708e-08, 0, 1, 0, 1, 0, -0.5, 0, 1.3113416e-07, 0.5, 1, -1.5)
+
+[node name="Default6" parent="." unique_id=1548874953 instance=ExtResource("1_ba8gm")]
+transform = Transform3D(1.13246855e-07, 0, 1, 0, 0.5, 0, -1.5, 0, 7.54979e-08, 0.5, 2.5, -0.5)
+
+[node name="Default3" parent="." unique_id=1905096301 instance=ExtResource("1_ba8gm")]
+transform = Transform3D(-0.5, -4.371139e-08, 3.821371e-15, 0, -2.1855694e-08, -1, 4.371139e-08, -0.5, 4.371139e-08, 0, 2, -0.5)
+
+[node name="Sprite3D3" type="Sprite3D" parent="." unique_id=306466035]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 200, 0, -1, 0, -4.371139e-08, 0.01497978, 1.0422792, -0.5)
+modulate = Color(1, 1, 1, 0.6156863)
+texture = SubResource("GradientTexture1D_378qc")
+
+[node name="Sprite3D4" type="Sprite3D" parent="." unique_id=522203592]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 200, 0, -1, 0, -4.371139e-08, 0.033684075, 1.0422792, -0.5)
+modulate = Color(1, 1, 1, 0.6156863)
+texture = SubResource("GradientTexture1D_378qc")
+
+[node name="Sprite3D5" type="Sprite3D" parent="." unique_id=1510576536]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 200, 0, -1, 0, -4.371139e-08, 0.07792717, 1.0422792, -0.5)
+modulate = Color(1, 1, 1, 0.6156863)
+texture = SubResource("GradientTexture1D_378qc")
+
+[node name="Sprite3D6" type="Sprite3D" parent="." unique_id=1664937525]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 200, 0, -1, 0, -4.371139e-08, 0.13860661, 1.0422792, -0.5)
+modulate = Color(1, 1, 1, 0.6156863)
+texture = SubResource("GradientTexture1D_378qc")
+
+[node name="Sprite3D7" type="Sprite3D" parent="." unique_id=2125687749]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 200, 0, -1, 0, -4.371139e-08, 0.17383271, 1.0422792, -0.5)
+modulate = Color(1, 1, 1, 0.6156863)
+texture = SubResource("GradientTexture1D_378qc")
+
+[node name="Sprite3D8" type="Sprite3D" parent="." unique_id=1861059255]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 200, 0, -1, 0, -4.371139e-08, 0.2021172, 1.0422792, -0.5)
+modulate = Color(1, 1, 1, 0.6156863)
+texture = SubResource("GradientTexture1D_378qc")
+
+[node name="Sprite3D2" type="Sprite3D" parent="." unique_id=1957582953]
+transform = Transform3D(0, 0, 0.188703, 0, 0.188703, 0, -0.188703, 0, 0, 0.5070136, 2.4, -0.5)
+texture = ExtResource("2_v6xrn")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=1280019639]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1632728728]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02746582, 0.70000005, -0.5)
+shape = SubResource("BoxShape3D_378qc")

@@ -9,8 +9,9 @@ class_name asideness_user
 
 @onready var pty : PTY = $"../Terminal/PTY"
 @onready var terminal : Terminal = $"../Terminal"
-@onready var path = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP) + "/asideness"
-@onready var path_cfg = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP) + "/asideness/cfg.tres"
+@onready var path_base = OS.get_environment("HOME")
+@onready var path = path_base.path_join("/Desktop/asideness")
+@onready var path_cfg = path.path_join("/cfg.tres")
 #@onready var pipe_path = OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP) + "/asideness/cfg_reload"
 #var pipe_thread: Thread
 #var is_listening: bool = true
@@ -20,12 +21,15 @@ class_name asideness_user
 
 func _ready() :
 	DirAccess.make_dir_recursive_absolute(path)
+	print(path)
+	print(FileAccess.file_exists(path))
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	set_up()
 	cfg_create()
+	cfg_reload()
 
 func _exit_tree() -> void: 
-	DirAccess.remove_absolute(path)
+	OS.move_to_trash(path)
 
 #region cfg
 func cfg_create() :
@@ -43,22 +47,18 @@ func cfg_reload() :
 	cfg.mouse = cfg_loaded.mouse
 	cfg.volume = cfg_loaded.volume
 	$"../dark".color.a = cfg.darkness
-	print($"../dark".color.a)
-	print(cfg.darkness)
 	mouse = cfg.mouse
 #endregion
 
 #region user
 func _physics_process(delta):
 	if not is_on_floor(): velocity.y -= 9.8 * delta
-	if Input.is_action_just_pressed("ui_cancel") : 
-		console.visible = !console.visible
-		if mouse :
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-			mouse = false
-		else :
-			Input.mouse_mode = Input.MOUSE_MODE_CONFINED
-			mouse = true
+	if Input.is_action_just_pressed("ui_cancel") : console.visible = !console.visible
+	if Input.is_action_just_pressed("ui_undo") :
+		match Input.mouse_mode :
+			Input.MOUSE_MODE_CONFINED_HIDDEN :
+				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			_ : Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 	var input = Input.get_vector("ui_left","ui_right","ui_up","ui_down")
 
 	var direction := (transform.basis * Vector3(input.x, 0, input.y)).normalized()
@@ -71,6 +71,7 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, speed)
 
 	move_and_slide()
+
 
 func _unhandled_input(event):
 	if event is InputEventMouseMotion:
@@ -92,7 +93,8 @@ func _on_terminal_data_sent(data: PackedByteArray) :
 func create_file(file_path : String, content : String, is_exec : bool = false) :
 	var file = FileAccess.open(file_path, FileAccess.WRITE)
 	file.store_string(content)
-	#if is_exec : 
+	print(content)
+	if is_exec : OS.execute("chmod", ["+x", file_path])
 	file.close()
 
 func set_up() :
@@ -104,7 +106,7 @@ func set_up() :
 	await get_tree().create_timer(.3).timeout
 	pty.write("cd ~/Desktop/asideness")
 	push_note()
-	#create_file(path + "/cfg-reload.sh", )
+	create_file(path + "/cfg_reload.sh", "#!/bin/bash\n\nexec 3<>/dev/tcp/127.0.0.1/9000\necho \"cfg_reload\" >&3\nexec 3>&-", true)
 
 func push_note() :
 	var file = FileAccess.open(path + "/note.md", FileAccess.WRITE)

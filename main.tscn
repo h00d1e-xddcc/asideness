@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://c7wjlqf4cn6il"]
 
 [ext_resource type="FontFile" uid="uid://dc3isxur0qfch" path="res://SpaceMono-Regular.ttf" id="1_h2yge"]
-[ext_resource type="Texture2D" uid="uid://ch8id1l84i8t" path="res://textures/Prototype_Grid_Gray_05-256x256.png" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://beynx8omh45nc" path="res://user.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://p7pn20lo7vry" path="res://level/zero.tscn" id="2_lquwl"]
 [ext_resource type="Resource" uid="uid://diq5t6dw0oojt" path="res://level/zero.tres" id="4_1bvp3"]
+[ext_resource type="Script" uid="uid://qs1kb0nw1am6" path="res://server.gd" id="5_lquwl"]
 
 [sub_resource type="Theme" id="Theme_h2yge"]
 default_base_scale = 1.0
@@ -13,27 +14,17 @@ default_font_size = 16
 [sub_resource type="Environment" id="Environment_0vcn1"]
 background_energy_multiplier = 2.5
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_0vcn1"]
-size = Vector3(15, 0.1, 15)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
-albedo_texture = ExtResource("1_ig7tw")
-uv1_triplanar = true
-uv1_world_triplanar = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xm2m"]
-albedo_texture = ExtResource("1_ig7tw")
-uv1_triplanar = true
-uv1_world_triplanar = true
-
 [node name="main" type="Node3D" unique_id=2077997563]
 
 [node name="dark" type="ColorRect" parent="." unique_id=1089756696]
+z_index = -10
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
 color = Color(0, 0, 0, 1)
 
 [node name="Terminal" type="Terminal" parent="." unique_id=1427198143]
@@ -55,57 +46,15 @@ terminal_path = NodePath("..")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1711576086]
 environment = SubResource("Environment_0vcn1")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=79822353]
-
-[node name="floor" type="CollisionShape3D" parent="StaticBody3D" unique_id=1584016509]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.049999997, 0)
-shape = SubResource("BoxShape3D_0vcn1")
-
-[node name="Sprite3D2" type="Sprite3D" parent="StaticBody3D/floor" unique_id=1775387929]
-transform = Transform3D(13.6367445, 0, 0, 0, -5.9608107e-07, 13.6367445, 0, -13.6367445, -5.9608107e-07, 0, 0.049999997, 0)
-material_override = SubResource("StandardMaterial3D_h2yge")
-texture = ExtResource("1_ig7tw")
-
-[node name="for" type="CollisionShape3D" parent="StaticBody3D" unique_id=84734207]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 5, -5)
-shape = SubResource("BoxShape3D_0vcn1")
-
-[node name="floor" type="Sprite3D" parent="StaticBody3D/for" unique_id=292531982]
-transform = Transform3D(13.6367445, 0, 0, 0, -5.9608095e-07, -13.6367445, 0, 13.6367445, -5.9608095e-07, 0, 0, -5)
-material_override = SubResource("StandardMaterial3D_0xm2m")
-texture = ExtResource("1_ig7tw")
-
-[node name="back" type="CollisionShape3D" parent="StaticBody3D" unique_id=1335998900]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 5, 5)
-shape = SubResource("BoxShape3D_0vcn1")
-
-[node name="floor2" type="Sprite3D" parent="StaticBody3D/back" unique_id=1647511266]
-transform = Transform3D(-13.6367445, 0, 1.192162e-06, 1.192162e-06, -5.9608107e-07, 13.6367445, 5.2111056e-14, 13.6367445, 5.9608107e-07, 0, 0, -5)
-material_override = SubResource("StandardMaterial3D_0xm2m")
-texture = ExtResource("1_ig7tw")
-
-[node name="left" type="CollisionShape3D" parent="StaticBody3D" unique_id=1502945234]
-transform = Transform3D(0, -1.0000001, -4.371139e-08, 0, -4.371139e-08, 1, -1.0000001, 0, -8.881784e-16, -5, 5, 0)
-shape = SubResource("BoxShape3D_0vcn1")
-
-[node name="floor4" type="Sprite3D" parent="StaticBody3D/left" unique_id=413988294]
-transform = Transform3D(13.636743, -1.2111853e-14, -1.7882428e-06, -1.7882428e-06, -5.960809e-07, -13.636743, -7.816657e-14, 13.6367445, -5.960809e-07, 4.4408917e-15, 0, -5)
-material_override = SubResource("StandardMaterial3D_0xm2m")
-texture = ExtResource("1_ig7tw")
-
-[node name="right" type="CollisionShape3D" parent="StaticBody3D" unique_id=1882152327]
-transform = Transform3D(0, -1.0000001, -4.371139e-08, 0, -4.371139e-08, 1, -1.0000001, 0, -8.881784e-16, 5, 5, 0)
-shape = SubResource("BoxShape3D_0vcn1")
-
-[node name="floor3" type="Sprite3D" parent="StaticBody3D/right" unique_id=17651791]
-transform = Transform3D(-13.636743, -1.2111863e-14, 5.9608095e-07, 5.9608095e-07, -5.96081e-07, 13.636743, 2.6055525e-14, 13.6367445, 5.96081e-07, 4.4408917e-15, 0, -5)
-material_override = SubResource("StandardMaterial3D_0xm2m")
-texture = ExtResource("1_ig7tw")
+[node name="StaticBody3D" parent="." unique_id=1601148155 instance=ExtResource("2_lquwl")]
 
 [node name="asideness_user" parent="." unique_id=2138818970 node_paths=PackedStringArray("console") instance=ExtResource("2_0xm2m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 console = NodePath("../Terminal")
 lvl = ExtResource("4_1bvp3")
+
+[node name="Node" type="Node" parent="." unique_id=1813164091]
+script = ExtResource("5_lquwl")
 
 [connection signal="data_sent" from="Terminal" to="Terminal/PTY" method="write"]
 [connection signal="size_changed" from="Terminal" to="Terminal/PTY" method="resizev"]
